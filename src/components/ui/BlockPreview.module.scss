@@ -1,0 +1,42 @@
+@use '../../scss/base/variables' as *;
+@use '../../scss/mixins/mixins' as *;
+
+.card { padding: 14px; height: 100%; display: flex; flex-direction: column; gap: 4px; }
+.cardTitle { font-family: $font-body; font-weight: 700; font-size: 13px; }
+.cardBody { font-size: 11px; color: var(--text-dim); font-weight: 300; }
+
+.navbar { display: flex; align-items: center; justify-content: space-between; padding: 0 16px; height: 100%; }
+.navbarBrand { font-family: $font-body; font-weight: 700; font-size: 13px; }
+.navbarLinks { display: flex; gap: 16px; font-size: 11px; color: var(--text-dim); }
+.navbarBtn { padding: 6px 14px; border-radius: $radius-full; background: var(--accent); color: var(--accent-contrast); font-size: 10px; font-family: $font-mono; }
+
+.hero { height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; gap: 8px; padding: 12px; }
+.heroTitle { font-family: $font-display; font-weight: 800; font-size: clamp(16px, 2.4vw, 24px); }
+.heroDesc { font-size: 10.5px; color: var(--text-dim); max-width: 260px; font-weight: 300; }
+.heroBtn { padding: 8px 18px; border-radius: $radius-full; background: var(--accent); color: var(--accent-contrast); font-size: 10px; font-family: $font-mono; margin-top: 4px; }
+
+.sidebar { padding: 12px; height: 100%; }
+.sidebarTitle { font-family: $font-body; font-weight: 700; font-size: 12px; margin-bottom: 10px; }
+.sidebarItem { padding: 6px 9px; border-radius: 6px; font-size: 10.5px; color: var(--text-dim); margin-bottom: 2px; }
+.sidebarItemActive { background: rgba(var(--accent-rgb), .14); color: var(--accent); font-weight: 600; }
+
+.stat { padding: 14px; height: 100%; display: flex; flex-direction: column; justify-content: center; gap: 4px; }
+.statNum { font-family: $font-display; font-weight: 800; font-size: 22px; }
+.statLabel { font-size: 10px; color: var(--text-dim); text-transform: uppercase; letter-spacing: .08em; }
+
+.table { height: 100%; padding: 10px; font-size: 10.5px; }
+.tableRow { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 8px; padding: 6px 0; border-bottom: 1px solid var(--border); }
+.tableRow:last-child { border-bottom: none; }
+.tableHead { color: var(--text-faint); font-family: $font-mono; font-size: 9px; text-transform: uppercase; letter-spacing: .06em; }
+.badge { display: inline-flex; padding: 2px 8px; border-radius: $radius-full; font-size: 9px; background: rgba(52,211,153,.15); color: #34d399; }
+
+.form { padding: 12px; height: 100%; display: flex; flex-direction: column; gap: 6px; }
+.formTitle { font-family: $font-body; font-weight: 700; font-size: 12px; margin-bottom: 2px; }
+.formInput { height: 22px; border-radius: 6px; background: var(--bg); border: 1px solid var(--border); }
+.formBtn { margin-top: 4px; padding: 6px; border-radius: 7px; background: var(--accent); color: var(--accent-contrast); font-size: 10px; text-align: center; font-family: $font-mono; }
+
+.image { height: 100%; display: flex; align-items: center; justify-content: center; font-size: 26px; background: repeating-linear-gradient(45deg, var(--border-soft), var(--border-soft) 8px, transparent 8px, transparent 16px); border-radius: $radius-sm; }
+
+.buttonRow { height: 100%; display: flex; align-items: center; justify-content: center; gap: 6px; padding: 8px; flex-wrap: wrap; }
+.btnPrimary { padding: 7px 14px; border-radius: $radius-full; background: var(--accent); color: var(--accent-contrast); font-size: 10px; font-family: $font-mono; }
+.btnGhost { padding: 7px 14px; border-radius: $radius-full; border: 1px solid var(--border-strong); color: var(--text-dim); font-size: 10px; font-family: $font-mono; }

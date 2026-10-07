@@ -1,0 +1,96 @@
+@use '../scss/base/variables' as *;
+@use '../scss/mixins/mixins' as *;
+
+.layout {
+  display: grid; grid-template-columns: 1fr 380px; gap: 40px; align-items: start;
+  @include bp(lg) { grid-template-columns: 1fr; }
+}
+
+.stageWrap {
+  @include card-surface;
+  min-height: 420px;
+  display: flex; align-items: center; justify-content: center;
+  position: relative; overflow: hidden;
+  background:
+    radial-gradient(circle at 30% 20%, rgba(var(--accent-rgb),.08), transparent 60%),
+    var(--bg);
+}
+
+.previewEl {
+  width: 90px; height: 90px;
+  background: linear-gradient(135deg, var(--accent-5), var(--accent-2));
+  display: flex; align-items: center; justify-content: center;
+  font-family: $font-body; font-weight: 700; font-size: 13px; color: #08090b;
+}
+
+.panel { @include card-surface; padding: 24px; }
+.panelTitle { font-family: $font-body; font-weight: 600; font-size: 15px; margin-bottom: 18px; }
+
+.sliderRow { display: flex; flex-direction: column; gap: 6px; margin-bottom: 16px; }
+.sliderLabel { display: flex; justify-content: space-between; font-family: $font-mono; font-size: 11px; color: var(--text-dim); }
+.sliderLabel b { color: var(--text); font-weight: 400; }
+input[type="range"] {
+  -webkit-appearance: none; width: 100%; height: 3px;
+  background: var(--border-strong); border-radius: 999px; outline: none;
+}
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none; width: 15px; height: 15px; border-radius: 50%;
+  background: var(--accent-5); cursor: pointer; border: 2px solid var(--bg);
+}
+
+.row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 16px; }
+.select {
+  padding: 10px 12px; border-radius: $radius-sm; border: 1px solid var(--border);
+  background: var(--bg); color: var(--text); font-family: $font-mono; font-size: 12px;
+  outline: none;
+  &:focus { border-color: var(--accent-5); }
+}
+
+.presetGrid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-bottom: 16px; }
+.presetBtn {
+  padding: 10px 6px; border-radius: $radius-sm; border: 1px solid var(--border);
+  font-family: $font-mono; font-size: 10.5px; color: var(--text-dim);
+  transition: all .25s ease;
+  &:hover { border-color: var(--accent-5); color: var(--accent-5); }
+}
+.presetActive { background: var(--accent-5); border-color: var(--accent-5); color: #08090b; }
+
+.codeBlock {
+  margin-top: 8px; background: var(--bg); border: 1px solid var(--border);
+  border-radius: $radius-sm; padding: 16px; font-family: $font-mono; font-size: 10.5px;
+  line-height: 1.7; color: var(--text-dim); white-space: pre-wrap; word-break: break-word;
+  position: relative; max-height: 260px; overflow-y: auto;
+}
+.copyCodeBtn {
+  position: absolute; top: 10px; right: 10px;
+  display: flex; align-items: center; gap: 5px;
+  padding: 6px 11px; border-radius: $radius-full; border: 1px solid var(--border);
+  font-family: $font-mono; font-size: 10px; color: var(--text-dim); background: var(--surface);
+  &:hover { border-color: var(--accent-5); color: var(--accent-5); }
+}
+
+/* GALLERY (bonus) */
+.groupTitle { font-family: $font-body; font-weight: 600; font-size: 16px; margin-bottom: 16px; }
+.gallerySubtext {
+  font-family: $font-mono; font-size: 11.5px; color: var(--text-dim);
+  margin: -8px 0 20px; line-height: 1.7; max-width: 520px;
+  code { color: var(--accent); }
+}
+.group { margin: 44px 0; }
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 20px; }
+.card { @include card-surface; overflow: hidden; }
+.card:hover { border-color: var(--border-strong); }
+.stage {
+  height: 150px; display: flex; align-items: center; justify-content: center;
+  background: var(--bg); position: relative;
+  perspective: 600px;
+}
+.demoBox { width: 52px; height: 52px; border-radius: 14px; background: linear-gradient(135deg, var(--accent), var(--accent-5)); }
+.foot { padding: 14px 18px; border-top: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; }
+.name { font-family: $font-body; font-weight: 600; font-size: 13px; }
+.desc { font-family: $font-mono; font-size: 10px; color: var(--text-faint); margin-top: 2px; }
+.replay {
+  width: 30px; height: 30px; border-radius: 50%; border: 1px solid var(--border);
+  display: grid; place-items: center; color: var(--text-dim); transition: all .3s ease; flex-shrink: 0;
+  &:hover { border-color: var(--accent); color: var(--accent); transform: rotate(180deg); }
+}

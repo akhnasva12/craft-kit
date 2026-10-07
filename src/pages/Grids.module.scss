@@ -1,0 +1,154 @@
+@use '../scss/base/variables' as *;
+@use '../scss/mixins/mixins' as *;
+
+.list { display: flex; flex-direction: column; gap: 24px; }
+
+.card { @include card-surface; overflow: hidden; }
+.card:hover { border-color: var(--border-strong); }
+
+.head {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 20px 24px; border-bottom: 1px solid var(--border);
+  gap: 16px; flex-wrap: wrap;
+}
+.headTitle { font-family: $font-body; font-weight: 600; font-size: 16px; }
+.headDesc { color: var(--text-dim); font-size: 12.5px; margin-top: 4px; font-weight: 300; }
+
+.copyBtn {
+  display: flex; align-items: center; gap: 6px;
+  padding: 8px 14px; border-radius: $radius-full;
+  border: 1px solid var(--border);
+  font-family: $font-mono; font-size: 11px; color: var(--text-dim);
+  transition: all .25s ease; flex-shrink: 0;
+  &:hover { border-color: var(--accent); color: var(--accent); }
+}
+
+.body { padding: 24px; }
+
+.demoGrid { display: grid; gap: 8px; min-height: 140px; }
+.demoBox {
+  background: linear-gradient(135deg, rgba(var(--accent-rgb),.16), rgba(var(--accent-rgb),.04));
+  border: 1px solid var(--border-strong);
+  border-radius: $radius-sm;
+  display: flex; align-items: center; justify-content: center;
+  font-family: $font-mono; font-size: 10px; color: var(--text-dim);
+  min-height: 32px;
+}
+
+.code {
+  margin-top: 18px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: $radius-sm;
+  padding: 14px 16px;
+  font-family: $font-mono; font-size: 11.5px; line-height: 1.7;
+  color: var(--text-dim);
+  overflow-x: auto;
+  white-space: pre;
+}
+.code em { font-style: normal; color: var(--accent); }
+
+/* ── BUILDER ── */
+.builderLayout {
+  display: grid;
+  grid-template-columns: 200px 1fr 300px;
+  gap: 20px;
+  align-items: start;
+  @include bp(lg) { grid-template-columns: 1fr; }
+}
+
+.palette { @include card-surface; padding: 18px; position: sticky; top: 100px; @include bp(lg) { position: static; } }
+.paletteTitle { font-family: $font-body; font-weight: 600; font-size: 13px; margin-bottom: 12px; }
+.paletteGrid { display: flex; flex-direction: column; gap: 6px; }
+.paletteBtn {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 10px 12px; border-radius: $radius-sm; border: 1px solid var(--border);
+  font-family: $font-mono; font-size: 11px; color: var(--text-dim);
+  transition: all .2s ease;
+  &:hover { border-color: var(--accent-2); color: var(--accent-2); }
+}
+
+.presetsTitle { font-family: $font-body; font-weight: 600; font-size: 13px; margin: 20px 0 10px; }
+.presetBtn {
+  width: 100%; text-align: left; padding: 9px 12px; margin-bottom: 6px;
+  border-radius: $radius-sm; border: 1px solid var(--border);
+  font-family: $font-mono; font-size: 10.5px; color: var(--text-dim);
+  &:hover { border-color: var(--accent-2); color: var(--accent-2); }
+}
+
+.canvasArea { @include card-surface; padding: 20px; }
+.canvasToolbar { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-bottom: 16px; flex-wrap: wrap; }
+.toolbarGroup { display: flex; align-items: center; gap: 10px; }
+.toolbarLabel { font-family: $font-mono; font-size: 10.5px; color: var(--text-dim); white-space: nowrap; }
+.toolbarSlider { width: 100px; }
+input[type="range"].toolbarSlider {
+  -webkit-appearance: none; height: 3px; background: var(--border-strong); border-radius: 999px; outline: none;
+}
+input[type="range"].toolbarSlider::-webkit-slider-thumb {
+  -webkit-appearance: none; width: 13px; height: 13px; border-radius: 50%;
+  background: var(--accent-2); cursor: pointer; border: 2px solid var(--bg);
+}
+.clearBtn {
+  display: flex; align-items: center; gap: 6px; padding: 7px 13px;
+  border-radius: $radius-full; border: 1px solid var(--border);
+  font-family: $font-mono; font-size: 10.5px; color: var(--text-dim);
+  &:hover { border-color: var(--accent-3); color: var(--accent-3); }
+}
+
+.canvas {
+  display: grid;
+  border: 1px dashed var(--border-strong);
+  border-radius: $radius-sm;
+  padding: 12px;
+  min-height: 260px;
+}
+.canvasEmpty {
+  grid-column: 1 / -1;
+  display: flex; align-items: center; justify-content: center;
+  min-height: 220px; color: var(--text-faint);
+  font-family: $font-mono; font-size: 12px; text-align: center; flex-direction: column; gap: 8px;
+}
+
+.block {
+  border-radius: $radius-sm; border: 1px solid var(--border);
+  background: var(--surface-raised); cursor: pointer;
+  min-height: 56px;
+  transition: border-color .2s ease, box-shadow .2s ease;
+  position: relative;
+  &:hover { border-color: var(--accent-2); }
+}
+.blockSelected { border-color: var(--accent-2); box-shadow: 0 0 0 2px rgba(var(--accent-2-rgb, 124,140,255), .25); }
+.blockRemove {
+  position: absolute; top: 4px; right: 4px; z-index: 2;
+  width: 20px; height: 20px; border-radius: 50%;
+  background: var(--bg); border: 1px solid var(--border);
+  display: grid; place-items: center; color: var(--text-faint);
+  opacity: 0; transition: opacity .2s ease;
+}
+.block:hover .blockRemove { opacity: 1; }
+.blockRemove:hover { color: var(--accent-3); border-color: var(--accent-3); }
+
+.inspector { @include card-surface; padding: 20px; }
+.inspectorTitle { font-family: $font-body; font-weight: 600; font-size: 14px; margin-bottom: 4px; }
+.inspectorType { font-family: $font-mono; font-size: 10.5px; color: var(--text-faint); margin-bottom: 18px; }
+.inspectorEmpty { font-family: $font-mono; font-size: 11px; color: var(--text-faint); text-align: center; padding: 30px 10px; }
+
+.codeTabs { display: flex; gap: 6px; margin: 20px 0 10px; }
+.codeTab {
+  padding: 7px 13px; border-radius: $radius-full; border: 1px solid var(--border);
+  font-family: $font-mono; font-size: 10.5px; color: var(--text-dim);
+}
+.codeTabActive { background: var(--accent-2); border-color: var(--accent-2); color: #08090b; }
+.codeOutput {
+  background: var(--bg); border: 1px solid var(--border); border-radius: $radius-sm;
+  padding: 14px; font-family: $font-mono; font-size: 10.5px; line-height: 1.7;
+  color: var(--text-dim); white-space: pre-wrap; word-break: break-word;
+  max-height: 260px; overflow-y: auto; position: relative;
+}
+.codeCopy {
+  position: absolute; top: 10px; right: 10px;
+  display: flex; align-items: center; gap: 5px;
+  padding: 6px 11px; border-radius: $radius-full; border: 1px solid var(--border);
+  font-family: $font-mono; font-size: 10px; color: var(--text-dim); background: var(--surface);
+  &:hover { border-color: var(--accent-2); color: var(--accent-2); }
+}

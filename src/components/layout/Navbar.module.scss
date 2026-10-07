@@ -1,0 +1,99 @@
+@use '../../scss/base/variables' as *;
+@use '../../scss/mixins/mixins' as *;
+
+.nav {
+  position: fixed; top: 0; left: 0; right: 0;
+  z-index: $z-nav;
+  padding: 16px clamp(20px, 5vw, 44px);
+  display: flex; align-items: center; justify-content: space-between;
+}
+
+.navInner {
+  width: 100%;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 10px 10px 10px 20px;
+  border-radius: $radius-full;
+  @include glass(.6);
+  transition: border-color .4s $ease-out-expo, background-color .4s $ease-out-expo;
+}
+
+.logo {
+  display: flex; align-items: baseline; gap: 8px;
+  font-family: $font-heading;
+  font-size: 19px;
+  letter-spacing: .06em;
+}
+.logoMark { color: var(--accent); }
+.logoRest { color: var(--text-dim); font-family: $font-mono; font-size: 11px; letter-spacing: .12em; }
+
+.links {
+  display: flex; align-items: center; gap: 2px;
+  @include bp(lg) { display: none; }
+}
+
+.link {
+  position: relative;
+  padding: 9px 16px;
+  font-family: $font-mono;
+  font-size: 12px;
+  letter-spacing: .04em;
+  color: var(--text-dim);
+  border-radius: $radius-full;
+  transition: color .3s ease;
+  @include focus-ring;
+
+  &:hover { color: var(--text); }
+}
+
+.linkActive {
+  color: var(--text);
+  background: var(--surface-raised);
+  border: 1px solid var(--border);
+}
+
+.actions { display: flex; align-items: center; gap: 8px; }
+
+.iconBtn {
+  width: 38px; height: 38px;
+  display: grid; place-items: center;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  color: var(--text-dim);
+  transition: color .3s, border-color .3s, transform .3s $ease-spring, background .3s;
+  @include focus-ring;
+
+  &:hover { color: var(--accent); border-color: var(--accent); transform: rotate(-12deg) scale(1.06); }
+
+  svg { width: 16px; height: 16px; }
+}
+
+.menuBtn {
+  display: none;
+  @include bp(lg) { display: grid; }
+}
+
+.mobilePanel {
+  position: fixed; inset: 0; z-index: $z-overlay;
+  background: var(--bg);
+  display: flex; flex-direction: column;
+  padding: clamp(90px, 20vw, 130px) clamp(24px, 8vw, 60px) 40px;
+}
+
+.mobileLink {
+  font-family: $font-display;
+  font-size: clamp(32px, 10vw, 48px);
+  font-weight: 800;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--border);
+  color: var(--text);
+  display: flex; align-items: center; justify-content: space-between;
+}
+.mobileLink span:last-child { font-family: $font-mono; font-size: 12px; color: var(--text-dim); }
+
+.closeBtn {
+  position: absolute; top: 20px; right: clamp(20px, 5vw, 44px);
+  width: 44px; height: 44px; border-radius: 50%;
+  border: 1px solid var(--border);
+  display: grid; place-items: center;
+  color: var(--text);
+}

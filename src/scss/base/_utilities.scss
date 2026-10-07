@@ -1,0 +1,88 @@
+@use './variables' as *;
+@use '../mixins/mixins' as *;
+
+.container {
+  width: 100%;
+  max-width: 1320px;
+  margin: 0 auto;
+  padding: 0 clamp(20px, 5vw, 44px);
+}
+
+.eyebrow { @include eyebrow; }
+
+.grain {
+  position: fixed; inset: -100%; width: 300%; height: 300%;
+  pointer-events: none; z-index: $z-bg; opacity: .022; mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  animation: grainAnim .15s steps(1) infinite;
+}
+@keyframes grainAnim {
+  0%{transform:translate(0,0)} 20%{transform:translate(-2%,-2%)}
+  40%{transform:translate(2%,1%)} 60%{transform:translate(-1%,3%)}
+  80%{transform:translate(3%,-1%)} 100%{transform:translate(-1%,2%)}
+}
+
+.btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 13px 24px;
+  border-radius: $radius-full;
+  font-family: $font-mono;
+  font-size: 13px;
+  letter-spacing: .02em;
+  transition: transform .35s $ease-spring, background-color .3s, color .3s, border-color .3s, box-shadow .3s;
+  @include focus-ring;
+
+  &--primary {
+    background: var(--accent);
+    color: var(--accent-contrast);
+    box-shadow: 0 1px 0 rgba(255,255,255,.25) inset;
+    &:hover { transform: translateY(-2px); box-shadow: 0 12px 28px -8px rgba(var(--accent-rgb), .55); }
+  }
+  &--ghost {
+    border: 1px solid var(--border-strong);
+    color: var(--text);
+    &:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
+  }
+}
+
+.pill {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 5px 12px;
+  border: 1px solid var(--border-strong);
+  border-radius: $radius-full;
+  font-family: $font-mono;
+  font-size: 10px;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+}
+
+.section {
+  padding: clamp(64px, 9vw, 140px) 0;
+  position: relative;
+}
+
+.section-head {
+  display: flex; align-items: flex-end; justify-content: space-between;
+  gap: 24px; margin-bottom: clamp(32px, 5vw, 56px);
+  flex-wrap: wrap;
+}
+
+.section-title {
+  font-size: clamp(32px, 4.2vw, 56px);
+  max-width: 640px;
+}
+
+.section-desc {
+  max-width: 380px;
+  color: var(--text-dim);
+  font-size: 14px;
+  line-height: 1.7;
+  font-weight: 300;
+}
+
+.sr-only {
+  position: absolute; width: 1px; height: 1px;
+  padding: 0; margin: -1px; overflow: hidden;
+  clip: rect(0,0,0,0); white-space: nowrap; border: 0;
+}

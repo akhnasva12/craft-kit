@@ -1,0 +1,21 @@
+@use '../../scss/base/variables' as *;
+@use '../../scss/mixins/mixins' as *;
+
+.hero {
+  padding: clamp(140px, 18vw, 200px) 0 clamp(40px, 6vw, 64px);
+  border-bottom: 1px solid var(--border);
+}
+
+.title {
+  font-size: clamp(46px, 8vw, 96px);
+  max-width: 900px;
+}
+
+.desc {
+  margin-top: 20px;
+  max-width: 520px;
+  color: var(--text-dim);
+  font-size: 15px;
+  line-height: 1.75;
+  font-weight: 300;
+}

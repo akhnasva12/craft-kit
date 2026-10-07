@@ -1,0 +1,136 @@
+@use '../scss/base/variables' as *;
+@use '../scss/mixins/mixins' as *;
+
+.layout {
+  display: grid;
+  grid-template-columns: 360px 1fr;
+  gap: 40px;
+  align-items: start;
+  @include bp(lg) { grid-template-columns: 1fr; }
+}
+
+/* PICKER CARD */
+.pickerCard {
+  @include card-surface;
+  padding: 24px;
+  position: sticky; top: 100px;
+  @include bp(lg) { position: static; }
+}
+
+.preview {
+  height: 140px; border-radius: $radius-md;
+  display: flex; flex-direction: column; justify-content: flex-end;
+  padding: 16px; margin-bottom: 20px;
+  transition: background .25s ease;
+  position: relative; overflow: hidden;
+}
+.previewHex { font-family: $font-body; font-weight: 700; font-size: 22px; }
+.previewName { font-family: $font-mono; font-size: 11px; opacity: .8; margin-top: 2px; }
+
+.pickerRow { display: flex; gap: 10px; align-items: center; margin-bottom: 14px; }
+.colorInput {
+  width: 44px; height: 44px; border-radius: $radius-sm; border: 1px solid var(--border);
+  padding: 0; background: none; cursor: pointer; flex-shrink: 0;
+  &::-webkit-color-swatch-wrapper { padding: 2px; }
+  &::-webkit-color-swatch { border-radius: 6px; border: none; }
+}
+.hexInput {
+  flex: 1; padding: 12px 14px; border-radius: $radius-sm;
+  border: 1px solid var(--border); background: var(--bg);
+  font-family: $font-mono; font-size: 13px; color: var(--text);
+  outline: none;
+  &:focus { border-color: var(--accent); }
+}
+.hexInput.invalid { border-color: var(--accent-3); }
+
+.actionsRow { display: flex; gap: 8px; }
+.iconBtn {
+  width: 40px; height: 40px; border-radius: $radius-sm;
+  border: 1px solid var(--border); display: grid; place-items: center;
+  color: var(--text-dim); transition: all .25s ease; flex: 1;
+  &:hover { border-color: var(--accent); color: var(--accent); }
+}
+.iconBtn.starred { color: var(--accent-3); border-color: var(--accent-3); }
+
+.swatchStripLabel { @include eyebrow; font-size: 9px; margin: 20px 0 10px; display: block; }
+.swatchStrip { display: flex; flex-wrap: wrap; gap: 6px; }
+.miniSwatch {
+  width: 26px; height: 26px; border-radius: 6px; border: 1px solid var(--border);
+  cursor: pointer; transition: transform .2s ease; flex-shrink: 0;
+  &:hover { transform: scale(1.15); }
+}
+.emptyMini { font-family: $font-mono; font-size: 10px; color: var(--text-faint); }
+
+/* RIGHT COLUMN */
+.groupTitle { font-family: $font-body; font-weight: 600; font-size: 16px; margin-bottom: 16px; }
+.group { margin-bottom: 44px; }
+
+.formatsGrid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; }
+.formatCard {
+  @include card-surface; padding: 14px 16px;
+  display: flex; align-items: center; justify-content: space-between; cursor: pointer;
+  &:hover { border-color: var(--accent); }
+}
+.formatLabel { @include eyebrow; font-size: 9px; margin-bottom: 4px; display: block; }
+.formatValue { font-family: $font-mono; font-size: 13px; }
+
+.shadesList { display: flex; flex-direction: column; border: 1px solid var(--border); border-radius: $radius-md; overflow: hidden; }
+.shadeRow {
+  display: flex; align-items: center; gap: 14px; padding: 10px 16px;
+  border-bottom: 1px solid var(--border); cursor: pointer;
+  transition: background .2s ease;
+  &:last-child { border-bottom: none; }
+  &:hover { background: var(--surface-raised); }
+}
+.shadeNum { font-family: $font-mono; font-size: 11px; color: var(--text-dim); width: 32px; }
+.shadeSwatch { width: 30px; height: 30px; border-radius: 7px; border: 1px solid var(--border); flex-shrink: 0; }
+.shadeHex { font-family: $font-mono; font-size: 12px; color: var(--text-dim); flex: 1; }
+.shadeCopy { color: var(--text-faint); }
+.shadeRow:hover .shadeCopy { color: var(--accent); }
+
+.gradientsGrid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; }
+.gradientCard { @include card-surface; overflow: hidden; }
+.gradientPreview { height: 90px; }
+.gradientInfo { padding: 12px 14px; display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+.gradientLabel { font-family: $font-body; font-weight: 600; font-size: 12.5px; }
+.gradientCode { font-family: $font-mono; font-size: 9.5px; color: var(--text-faint); margin-top: 2px; max-width: 160px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+.a11yGrid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 14px; }
+.a11yCard { @include card-surface; padding: 18px; }
+.a11yLabel { @include eyebrow; font-size: 9px; margin-bottom: 8px; display: block; }
+.a11yValue { font-family: $font-body; font-weight: 700; font-size: 22px; }
+.a11ySmall { color: var(--text-faint); font-size: 12px; }
+
+.badge {
+  display: inline-flex; align-items: center; gap: 5px;
+  font-family: $font-mono; font-size: 10px; letter-spacing: .04em;
+  padding: 4px 9px; border-radius: $radius-full; margin-top: 10px;
+}
+.badgePass { background: rgba(52,211,153,.14); color: #34d399; }
+.badgeWarn { background: rgba(251,191,36,.14); color: #fbbf24; }
+.badgeFail { background: rgba(248,113,113,.14); color: #f87171; }
+
+.textPreviewRow {
+  border-radius: $radius-md; padding: 24px; margin-top: 14px;
+  font-family: $font-body; font-size: 18px; font-weight: 600;
+}
+
+.exportTabs { display: flex; gap: 6px; margin-bottom: 12px; }
+.exportTab {
+  padding: 8px 14px; border-radius: $radius-full; border: 1px solid var(--border);
+  font-family: $font-mono; font-size: 11px; color: var(--text-dim);
+  &:hover { color: var(--text); }
+}
+.exportTabActive { background: var(--accent); border-color: var(--accent); color: var(--accent-contrast); }
+.exportCode {
+  background: var(--bg); border: 1px solid var(--border); border-radius: $radius-md;
+  padding: 18px 20px; font-family: $font-mono; font-size: 12px; line-height: 1.8;
+  color: var(--text-dim); white-space: pre; overflow-x: auto; position: relative;
+}
+.exportCopy {
+  position: absolute; top: 14px; right: 14px;
+  display: flex; align-items: center; gap: 6px;
+  padding: 7px 12px; border-radius: $radius-full; border: 1px solid var(--border);
+  font-family: $font-mono; font-size: 10.5px; color: var(--text-dim); background: var(--surface);
+  &:hover { border-color: var(--accent); color: var(--accent); }
+}
